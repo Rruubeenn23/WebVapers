@@ -76,10 +76,12 @@ function abrirModalCompra(producto) {
         console.error('Modal de compra no encontrado.');
         return;
     }
-    
+
     document.getElementById('modal-compra-title').textContent = `Gestionar Compra: ${producto}`;
     modal.dataset.producto = producto;
-    modal.classList.add('show');
+
+    modal.classList.remove('hidden'); // ✅ Quita la clase 'hidden'
+    modal.classList.add('flex'); // ✅ Añade 'flex' para que se muestre correctamente
 
     const form = document.getElementById('modal-compra-form');
     form.onsubmit = (e) => {
@@ -97,11 +99,14 @@ function abrirModalCompra(producto) {
     };
 }
 
+
 // Función para cerrar el modal de compra
 function cerrarModalCompra() {
-    const modal = document.getElementById('modal-compra');
-    modal.classList.remove('show');
+    const modal = document.getElementById("modal-compra");
+    modal.classList.add("hidden"); // ✅ Oculta el modal
+    modal.classList.remove("flex"); // ✅ Asegura que se oculta correctamente
 }
+
 
 // Función para abrir el modal de venta
 function abrirModalVenta(producto) {
@@ -113,8 +118,10 @@ function abrirModalVenta(producto) {
 
     document.getElementById('modal-venta-title').textContent = `Gestionar Venta: ${producto}`;
     modal.dataset.producto = producto;
-    modal.classList.add('show');
-
+    
+    modal.classList.remove('hidden'); // ✅ Quita la clase 'hidden'
+    modal.classList.add('flex'); // ✅ Añade 'flex' para que se muestre correctamente
+    
     const form = document.getElementById('modal-venta-form');
     form.onsubmit = (e) => {
         e.preventDefault();
@@ -135,7 +142,8 @@ function abrirModalVenta(producto) {
 // Función para cerrar el modal de venta
 function cerrarModalVenta() {
     const modal = document.getElementById('modal-venta');
-    modal.classList.remove('show');
+    modal.classList.add("hidden"); // ✅ Oculta el modal
+    modal.classList.remove("flex"); // ✅ Asegura que se oculta correctamente
 }
 
 // Función para añadir una compra
