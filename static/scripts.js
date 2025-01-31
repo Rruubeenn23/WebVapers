@@ -5,15 +5,24 @@ function cargarProductosCompra() {
         .then(data => {
             const container = document.getElementById('productos-compra');
             container.innerHTML = '';
+
+            if (data.length === 0) {
+                container.innerHTML = `<p class="text-center text-yellow-300 text-lg">No hay productos disponibles.</p>`;
+                return;
+            }
+
             data.forEach(producto => {
                 const card = document.createElement('div');
-                card.className = 'card';
+                card.className = 'bg-gray-800 p-4 rounded-lg shadow-lg text-center w-full sm:w-1/2 md:w-1/3 lg:w-1/4';
+
                 card.innerHTML = `
-                    <img src="${producto.imagen}" alt="${producto.producto}">
-                    <h3>${producto.producto}</h3>
-                    <p>Cantidad disponible: ${producto.cantidad}</p>
-                    <button onclick="abrirModalCompra('${producto.producto}')">Gestionar Compra</button>
+                    <img src="${producto.imagen}" alt="${producto.producto}" class="w-full h-40 object-cover rounded-md border border-gray-700">
+                    <h3 class="mt-2 text-lg font-bold text-yellow-300">${producto.producto}</h3>
+                    <p class="text-sm text-gray-400">Cantidad disponible: ${producto.cantidad}</p>
+                    <button class="mt-3 bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md w-full"
+                        onclick="abrirModalCompra('${producto.producto}')">Gestionar Compra</button>
                 `;
+
                 container.appendChild(card);
             });
         })
@@ -27,15 +36,24 @@ function cargarProductosVenta() {
         .then(data => {
             const container = document.getElementById('productos-venta');
             container.innerHTML = '';
+
+            if (data.length === 0) {
+                container.innerHTML = `<p class="text-center text-yellow-300 text-lg">No hay productos disponibles.</p>`;
+                return;
+            }
+
             data.forEach(producto => {
                 const card = document.createElement('div');
-                card.className = 'card';
+                card.className = 'bg-gray-800 p-4 rounded-lg shadow-lg text-center w-full sm:w-1/2 md:w-1/3 lg:w-1/4';
+
                 card.innerHTML = `
-                    <img src="${producto.imagen}" alt="${producto.producto}">
-                    <h3>${producto.producto}</h3>
-                    <p>Cantidad disponible: ${producto.cantidad}</p>
-                    <button onclick="abrirModalVenta('${producto.producto}')">Gestionar Venta</button>
+                    <img src="${producto.imagen}" alt="${producto.producto}" class="w-full h-40 object-cover rounded-md border border-gray-700">
+                    <h3 class="mt-2 text-lg font-bold text-yellow-300">${producto.producto}</h3>
+                    <p class="text-sm text-gray-400">Cantidad disponible: ${producto.cantidad}</p>
+                    <button class="mt-3 bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-md w-full"
+                        onclick="abrirModalVenta('${producto.producto}')">Gestionar Venta</button>
                 `;
+
                 container.appendChild(card);
             });
         })
@@ -69,7 +87,6 @@ function abrirModalCompra(producto) {
         cerrarModalCompra();
     };
 }
-
 
 // Función para cerrar el modal de compra
 function cerrarModalCompra() {
@@ -105,8 +122,6 @@ function abrirModalVenta(producto) {
         cerrarModalVenta();
     };
 }
-
-
 
 // Función para cerrar el modal de venta
 function cerrarModalVenta() {
@@ -178,7 +193,6 @@ document.getElementById('modal-agregar-form').addEventListener('submit', (e) => 
     })
     .catch(error => console.error('Error al agregar producto:', error));
 });
-
 
 // Detectar en qué página estamos y cargar los productos correspondientes
 document.addEventListener('DOMContentLoaded', () => {
