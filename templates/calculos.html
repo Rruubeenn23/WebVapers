@@ -4,68 +4,126 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cálculos</title>
-    <link rel="stylesheet" href="/static/styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <nav>
-        <a href="/compra">Compra</a>
-        <a href="/venta">Venta</a>
-        <a href="/calculos" class="active">Cálculos</a>
+<body class="min-h-screen bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white">
+    
+    <!-- Navbar -->
+    <nav class="bg-gradient-to-r from-indigo-700 to-blue-500 py-4 shadow-md fixed top-0 left-0 w-full z-50">
+        <div class="flex justify-center space-x-6">
+            <a href="/compra" class="text-lg font-semibold text-gray-200 hover:text-white transition">Compra</a>
+            <a href="/venta" class="text-lg font-semibold text-gray-200 hover:text-white transition">Venta</a>
+            <a href="/calculos" class="text-lg font-semibold text-yellow-300 hover:text-white transition">Cálculos</a>
+        </div>
     </nav>
 
-    <section>
-        <h2>Vapers Totales Vendidos</h2>
-        <h1>{{ vapers_totales_vendidos }}</h1>
-    </section>
-    
+    <!-- Contenedor principal -->
+    <main class="mt-24 px-4 py-6 max-w-5xl mx-auto">
 
-    <section>
-        <h2>Vapers Más Vendidos</h2>
-        <table>
-            <tr><th>Producto</th><th>Total Vendido</th></tr>
-            {% for item in vapers_mas_vendidos %}
-            <tr><td>{{ item[0] }}</td><td>{{ item[1] }}</td></tr>
-            {% endfor %}
-        </table>
-    </section>
+        <!-- Vapers Totales Vendidos -->
+        <section class="bg-gray-800 text-white p-6 rounded-lg shadow-lg mb-6">
+            <h2 class="text-2xl font-bold text-center mb-4 text-yellow-300">Vapers Totales Vendidos</h2>
+            <h1 class="text-center text-4xl font-extrabold">{{ vapers_totales_vendidos }}</h1>
+        </section>
 
-    <section>
-        <h2>Clientes con Más Compras</h2>
-        <table>
-            <tr><th>Cliente</th><th>Total Comprado</th></tr>
-            {% for item in clientes_mas_compras %}
-            <tr><td>{{ item[0] }}</td><td>{{ item[1] }}</td></tr>
-            {% endfor %}
-        </table>
-    </section>
+        <!-- Vapers Más Vendidos -->
+        <section class="bg-gray-800 text-white p-6 rounded-lg shadow-lg mb-6">
+            <h2 class="text-2xl font-bold text-center mb-4 text-yellow-300">Vapers Más Vendidos</h2>
+            <table class="w-full border-collapse bg-gray-700 text-white rounded-lg">
+                <thead>
+                    <tr class="bg-indigo-600">
+                        <th class="p-3">Producto</th>
+                        <th class="p-3">Total Vendido</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in vapers_mas_vendidos %}
+                    <tr class="border-b border-gray-600 hover:bg-gray-600">
+                        <td class="p-3">{{ item[0] }}</td>
+                        <td class="p-3">{{ item[1] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
 
-    <section>
-        <h2>Media de Tiempo de Venta de Cada Vaper</h2>
-        <table>
-            <tr><th>Producto</th><th>Media de días hasta la venta</th></tr>
-            {% for item in tiempo_promedio_venta %}
-            <tr><td>{{ item[0] }}</td><td>{{ "%.2f"|format(item[1] if item[1] else 0) }}</td></tr>
-            {% endfor %}
-        </table>
-    </section>
+        <!-- Clientes con Más Compras -->
+        <section class="bg-gray-800 text-white p-6 rounded-lg shadow-lg mb-6">
+            <h2 class="text-2xl font-bold text-center mb-4 text-yellow-300">Clientes con Más Compras</h2>
+            <table class="w-full border-collapse bg-gray-700 text-white rounded-lg">
+                <thead>
+                    <tr class="bg-indigo-600">
+                        <th class="p-3">Cliente</th>
+                        <th class="p-3">Total Comprado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in clientes_mas_compras %}
+                    <tr class="border-b border-gray-600 hover:bg-gray-600">
+                        <td class="p-3">{{ item[0] }}</td>
+                        <td class="p-3">{{ item[1] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
 
-    <section>
-        <h2>Vapers que Más Compra Cada Cliente</h2>
-        <table>
-            <tr><th>Cliente</th><th>Producto Más Comprado</th><th>Cantidad</th></tr>
-            {% for item in clientes_top_vapers %}
-            <tr><td>{{ item[0] }}</td><td>{{ item[1] }}</td><td>{{ item[2] }}</td></tr>
-            {% endfor %}
-        </table>
-    </section>
+        <!-- Media de Tiempo de Venta -->
+        <section class="bg-gray-800 text-white p-6 rounded-lg shadow-lg mb-6">
+            <h2 class="text-2xl font-bold text-center mb-4 text-yellow-300">Media de Tiempo de Venta</h2>
+            <table class="w-full border-collapse bg-gray-700 text-white rounded-lg">
+                <thead>
+                    <tr class="bg-indigo-600">
+                        <th class="p-3">Producto</th>
+                        <th class="p-3">Media de días hasta la venta</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in tiempo_promedio_venta %}
+                    <tr class="border-b border-gray-600 hover:bg-gray-600">
+                        <td class="p-3">{{ item[0] }}</td>
+                        <td class="p-3">{{ "%.2f"|format(item[1] if item[1] else 0) }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
 
-    <section>
-        <h2>Hucha - Dinero Total Ganado</h2>
-        <p><strong>Total ganado:</strong> {{ hucha_total }}€</p>
-        <p><strong>Vapers comprados por Rubén:</strong> {{ ruben_vapers }}</p>
-        <p><strong>Dinero NO ganado por Rubén:</strong> - {{ dinero_no_ganado }}€</p>
-        <p><strong>Total si Rubén Pagara</strong> {{ dinero_si_pagara }}€</p>
-        <p><strong>Vapers que faltan por meter en la hucha</strong> 1 - 15€</p>
-    </section>
+        <!-- Vapers que Más Compra Cada Cliente -->
+        <section class="bg-gray-800 text-white p-6 rounded-lg shadow-lg mb-6">
+            <h2 class="text-2xl font-bold text-center mb-4 text-yellow-300">Vapers que Más Compra Cada Cliente</h2>
+            <table class="w-full border-collapse bg-gray-700 text-white rounded-lg">
+                <thead>
+                    <tr class="bg-indigo-600">
+                        <th class="p-3">Cliente</th>
+                        <th class="p-3">Producto Más Comprado</th>
+                        <th class="p-3">Cantidad</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in clientes_top_vapers %}
+                    <tr class="border-b border-gray-600 hover:bg-gray-600">
+                        <td class="p-3">{{ item[0] }}</td>
+                        <td class="p-3">{{ item[1] }}</td>
+                        <td class="p-3">{{ item[2] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Hucha y Dinero Ganado -->
+        <section class="bg-gray-800 text-white p-6 rounded-lg shadow-lg mb-6">
+            <h2 class="text-2xl font-bold text-center mb-4 text-yellow-300">Hucha - Dinero Total Ganado</h2>
+            <div class="text-center text-lg">
+                <p><strong class="text-yellow-300">Total ganado:</strong> {{ hucha_total }}€</p>
+                <p><strong class="text-yellow-300">Vapers comprados por Rubén:</strong> {{ ruben_vapers }}</p>
+                <p><strong class="text-red-400">Dinero NO ganado por Rubén:</strong> -{{ dinero_no_ganado }}€</p>
+                <p><strong class="text-green-400">Total si Rubén Pagara:</strong> {{ dinero_si_pagara }}€</p>
+                <p><strong class="text-orange-400">Vapers que faltan por meter en la hucha:</strong> 1 - 15€</p>
+            </div>
+        </section>
+
+    </main>
 </body>
 </html>
