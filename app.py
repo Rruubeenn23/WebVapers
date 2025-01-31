@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import create_engine, Column, Integer, String, func
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
+import os
 
 app = Flask(__name__)
 DATABASE_URL = 'sqlite:///vapers.db'
@@ -179,5 +180,6 @@ def agregar_producto():
     return jsonify({"message": "Producto agregado correctamente.", "error": False})
 
 
-if __name__ == '__main__':
-    app.run(debug=True)
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))  # Railway asigna dinámicamente el puerto
+    app.run(host="0.0.0.0", port=port, debug=True)
