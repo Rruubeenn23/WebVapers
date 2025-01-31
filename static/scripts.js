@@ -19,15 +19,24 @@ function cargarProductosCompra() {
                     <img src="${producto.imagen}" alt="${producto.producto}" class="w-full h-40 object-cover rounded-md border border-gray-700">
                     <h3 class="mt-2 text-lg font-bold text-yellow-300">${producto.producto}</h3>
                     <p class="text-sm text-gray-400">Cantidad disponible: ${producto.cantidad}</p>
-                    <button class="mt-3 bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md w-full"
-                        onclick="abrirModalCompra('${producto.producto}')">Gestionar Compra</button>
+                    <button class="mt-3 bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md w-full btn-gestionar-compra"
+                        data-producto="${producto.producto}">Gestionar Compra</button>
                 `;
 
                 container.appendChild(card);
             });
+
+            // 🔥 Agregar eventos después de que los elementos se hayan creado
+            document.querySelectorAll('.btn-gestionar-compra').forEach(btn => {
+                btn.addEventListener('click', (event) => {
+                    const producto = event.target.dataset.producto;
+                    abrirModalCompra(producto);
+                });
+            });
         })
         .catch(error => console.error('Error al cargar productos de compra:', error));
 }
+
 
 // Función para cargar productos en la sección de venta
 function cargarProductosVenta() {
