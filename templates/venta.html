@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Venta</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <nav>
+        <a href="/compra" class="active">Compra</a>
+        <a href="/venta">Venta</a>
+        <a href="/calculos">Cálculos</a>
+    </nav>
+    <section>
+        <h2>Gestión de Ventas</h2>
+        <div id="productos-venta" class="card-container"></div>
+    </section>
+    <!-- Modal para VENTA -->
+    <div id="modal-venta" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-btn" onclick="cerrarModalVenta()">×</span>
+            <h3 id="modal-venta-title"></h3>
+            <form id="modal-venta-form">
+                <input type="number" id="modal-venta-cantidad" placeholder="Cantidad" required>
+                <input type="date" id="modal-venta-fecha" required>
+                <input type="text" id="modal-venta-cliente" placeholder="Cliente" required>
+                <button type="submit">Guardar</button>
+            </form>
+        </div>
+    </div>
+
+
+    <script src="/static/scripts.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            cargarProductosVenta();
+        });
+    </script>
+</body>
+</html>

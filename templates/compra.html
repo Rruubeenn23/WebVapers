@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compra</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <nav>
+        <a href="/compra" class="active">Compra</a>
+        <a href="/venta">Venta</a>
+        <a href="/calculos">Cálculos</a>
+    </nav>
+    <section>
+        <h2>Gestión de Compras</h2>
+        <div id="productos-compra" class="card-container"></div>
+    </section>
+    <!-- Modal para COMPRA -->
+    <div id="modal-compra" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-btn" onclick="cerrarModalCompra()">×</span>
+            <h3 id="modal-compra-title"></h3>
+            <form id="modal-compra-form">
+                <input type="number" id="modal-compra-cantidad" placeholder="Cantidad" required>
+                <input type="date" id="modal-compra-fecha" required>
+                <button type="submit">Guardar</button>
+            </form>
+        </div>
+    </div>
+
+    <button id="btn-agregar-producto">➕ Agregar Nuevo Producto</button>
+    <!-- Modal para agregar productos -->
+    <div id="modal-agregar" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-btn" onclick="cerrarModalAgregar()">×</span>
+            <h3>Agregar Nuevo Producto</h3>
+            <form id="modal-agregar-form">
+                <input type="text" id="nuevo-producto-nombre" placeholder="Nombre del producto" required>
+                <input type="number" id="nuevo-producto-cantidad" placeholder="Cantidad inicial" required>
+                <input type="date" id="nuevo-producto-fecha" required>
+                <input type="text" id="nuevo-producto-imagen" placeholder="URL de la imagen" required>
+                <button type="submit">Agregar Producto</button>
+            </form>
+        </div>
+    </div>
+    <script src="/static/scripts.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            cargarProductosCompra();
+        });
+    </script>
+</body>
+</html>

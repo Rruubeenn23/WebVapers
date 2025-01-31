@@ -1,0 +1,10 @@
+[
+  {
+    "type": "sqlite",
+    "path": "c:\\Users\\Ruben\\Documents\\WebVapers\\vapers.db"
+  },
+  {
+    "type": "sqlite",
+    "path": "c:\\Users\\Ruben\\Documents\\WebVapers\\instance\\vapers.db"
+  }
+]
