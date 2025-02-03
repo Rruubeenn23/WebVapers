@@ -179,6 +179,24 @@ def agregar_producto():
 
     return jsonify({"message": "Producto agregado correctamente.", "error": False})
 
+@app.route('/eliminar_venta', methods=['POST'])
+def eliminar_venta():
+    data = request.json
+    producto = data['producto']
+    fecha = data['fecha']
+    cantidad = data['cantidad']
+
+    # Buscar la venta específica de Rubén
+    venta = session.query(Venta).filter_by(producto=producto, fecha_venta=fecha, cantidad=cantidad, cliente="Rubén").first()
+
+    if venta:
+        session.delete(venta)
+        session.commit()
+        return jsonify({"message": "Venta de Rubén eliminada correctamente."})
+    else:
+        return jsonify({"message": "Venta no encontrada para Rubén."}), 404
+
+
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))  # Railway asigna dinámicamente el puerto
